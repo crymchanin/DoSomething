@@ -58,6 +58,8 @@
             this.PlaceInfo_DBBrowseButton = new System.Windows.Forms.Button();
             this.PlaceInfo_DBPathBox = new System.Windows.Forms.TextBox();
             this.PostItemParamPage = new System.Windows.Forms.TabPage();
+            this.PostItemPar_SingleButton = new System.Windows.Forms.Button();
+            this.PostItemPar_MultipleUsersButton = new System.Windows.Forms.Button();
             this.PostItemPar_ParamsGetButton = new System.Windows.Forms.Button();
             this.PostItemPar_ForAllBox = new System.Windows.Forms.CheckBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -382,6 +384,8 @@
             // 
             // PostItemParamPage
             // 
+            this.PostItemParamPage.Controls.Add(this.PostItemPar_SingleButton);
+            this.PostItemParamPage.Controls.Add(this.PostItemPar_MultipleUsersButton);
             this.PostItemParamPage.Controls.Add(this.PostItemPar_ParamsGetButton);
             this.PostItemParamPage.Controls.Add(this.PostItemPar_ForAllBox);
             this.PostItemParamPage.Controls.Add(this.label14);
@@ -401,6 +405,28 @@
             this.PostItemParamPage.Text = "Параметры ИС ОПС Почтовые отправления";
             this.PostItemParamPage.UseVisualStyleBackColor = true;
             // 
+            // PostItemPar_SingleButton
+            // 
+            this.PostItemPar_SingleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.PostItemPar_SingleButton.Location = new System.Drawing.Point(306, 378);
+            this.PostItemPar_SingleButton.Name = "PostItemPar_SingleButton";
+            this.PostItemPar_SingleButton.Size = new System.Drawing.Size(292, 28);
+            this.PostItemPar_SingleButton.TabIndex = 8;
+            this.PostItemPar_SingleButton.Text = "Параметр для одного пользователя";
+            this.PostItemPar_SingleButton.UseVisualStyleBackColor = true;
+            this.PostItemPar_SingleButton.Click += new System.EventHandler(this.PostItemPar_SingleButton_Click);
+            // 
+            // PostItemPar_MultipleUsersButton
+            // 
+            this.PostItemPar_MultipleUsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.PostItemPar_MultipleUsersButton.Location = new System.Drawing.Point(8, 378);
+            this.PostItemPar_MultipleUsersButton.Name = "PostItemPar_MultipleUsersButton";
+            this.PostItemPar_MultipleUsersButton.Size = new System.Drawing.Size(292, 28);
+            this.PostItemPar_MultipleUsersButton.TabIndex = 7;
+            this.PostItemPar_MultipleUsersButton.Text = "Параметр для всех пользователей";
+            this.PostItemPar_MultipleUsersButton.UseVisualStyleBackColor = true;
+            this.PostItemPar_MultipleUsersButton.Click += new System.EventHandler(this.PostItemPar_MultipleUsersButton_Click);
+            // 
             // PostItemPar_ParamsGetButton
             // 
             this.PostItemPar_ParamsGetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -415,11 +441,11 @@
             // PostItemPar_ForAllBox
             // 
             this.PostItemPar_ForAllBox.AutoSize = true;
-            this.PostItemPar_ForAllBox.Location = new System.Drawing.Point(8, 376);
+            this.PostItemPar_ForAllBox.Location = new System.Drawing.Point(8, 446);
             this.PostItemPar_ForAllBox.Name = "PostItemPar_ForAllBox";
-            this.PostItemPar_ForAllBox.Size = new System.Drawing.Size(202, 22);
-            this.PostItemPar_ForAllBox.TabIndex = 7;
-            this.PostItemPar_ForAllBox.Text = "Для всех пользователей";
+            this.PostItemPar_ForAllBox.Size = new System.Drawing.Size(272, 22);
+            this.PostItemPar_ForAllBox.TabIndex = 9;
+            this.PostItemPar_ForAllBox.Text = "Изменить для всех пользователей";
             this.PostItemPar_ForAllBox.UseVisualStyleBackColor = true;
             this.PostItemPar_ForAllBox.CheckedChanged += new System.EventHandler(this.PostItemPar_ForAllBox_CheckedChanged);
             // 
@@ -456,10 +482,10 @@
             // PostItemPar_UpdateParamBox
             // 
             this.PostItemPar_UpdateParamBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.PostItemPar_UpdateParamBox.Location = new System.Drawing.Point(8, 404);
+            this.PostItemPar_UpdateParamBox.Location = new System.Drawing.Point(8, 474);
             this.PostItemPar_UpdateParamBox.Name = "PostItemPar_UpdateParamBox";
             this.PostItemPar_UpdateParamBox.Size = new System.Drawing.Size(590, 28);
-            this.PostItemPar_UpdateParamBox.TabIndex = 8;
+            this.PostItemPar_UpdateParamBox.TabIndex = 10;
             this.PostItemPar_UpdateParamBox.Text = "Изменить значение";
             this.PostItemPar_UpdateParamBox.UseVisualStyleBackColor = true;
             this.PostItemPar_UpdateParamBox.Click += new System.EventHandler(this.PostItemPar_UpdateParamBox_Click);
@@ -735,6 +761,8 @@
         private System.Windows.Forms.ComboBox PostItemPar_UsersBox;
         private System.Windows.Forms.CheckBox PostItemPar_ForAllBox;
         private System.Windows.Forms.Button PostItemPar_ParamsGetButton;
+        private System.Windows.Forms.Button PostItemPar_SingleButton;
+        private System.Windows.Forms.Button PostItemPar_MultipleUsersButton;
     }
 }
 

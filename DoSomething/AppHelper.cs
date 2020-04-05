@@ -43,6 +43,11 @@ namespace DoSomething {
         /// </summary>
         public static Log Log { get; set; }
 
+        /// <summary>
+        /// Главное окно программы
+        /// </summary>
+        public static MainForm MainForm { get; set; }
+
 
 
         /// <summary>
@@ -90,12 +95,13 @@ namespace DoSomething {
         /// Инициализация программы
         /// </summary>
         /// <returns></returns>
-        public static bool Init(out Exception innerException) {
+        public static bool Init(MainForm mainForm, out Exception innerException) {
             try {
                 Assembly execAssembly = Assembly.GetExecutingAssembly();
                 FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(execAssembly.Location);
                 CurrentDirectory = IOHelper.GetCurrentDir(execAssembly);
                 ProductName = fileVersionInfo.ProductName;
+                MainForm = mainForm;
 
                 ARGS = Environment.GetCommandLineArgs();
 

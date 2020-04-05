@@ -1,7 +1,7 @@
 ﻿using FirebirdSql.Data.FirebirdClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 
 
 namespace DoSomething.Modules {
@@ -105,8 +105,8 @@ namespace DoSomething.Modules {
         public static string GetParamValue(string connectionString, short placeId, int paramId) {
             string connStr = "SELECT COALESCE(VALI, VALS) as VAL " +
                              "FROM SETUPPARAM " +
-                             "WHERE PARAMID = " + paramId.ToString() + " " +
-                             "AND PARAMPLACEID = " + placeId.ToString() + ";";
+                             "WHERE PARAMID=" + paramId.ToString() + " " +
+                             "AND PARAMPLACEID=" + placeId.ToString() + ";";
 
             using (FbConnection connection = new FbConnection(connectionString)) {
                 connection.Open();
@@ -120,6 +120,38 @@ namespace DoSomething.Modules {
                 }
 
                 return (result == null) ? "" : result.ToString();
+            }
+        }
+
+        public static void SetParamPlaced(string connectionString, int paramId, bool placed) {
+            using (FbConnection connection = new FbConnection(connectionString)) {
+                connection.Open();
+
+                string connStr = "UPDATE PARAM SET ISPLACE=" + Convert.ToInt32(placed).ToString() + " " +
+                                 " WHERE PARAMID=" + paramId.ToString() + ";";
+                using (FbCommand command = new FbCommand(connStr, connection)) {
+                    FbTransaction transaction = connection.BeginTransaction();
+                    command.Transaction = transaction;
+                    command.ExecuteNonQuery();
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public static void DeleteParamValueForAllUsers(string connectionString, int paramId) {
+            string connStr = "DELETE FROM SETUPPARAM " +
+                 "WHERE PARAMID=" + paramId.ToString() +
+                 " AND PARAMPLACEID!=0;";
+
+            using (FbConnection connection = new FbConnection(connectionString)) {
+                connection.Open();
+
+                using (FbCommand command = new FbCommand(connStr, connection)) {
+                    FbTransaction transaction = connection.BeginTransaction();
+                    command.Transaction = transaction;
+                    command.ExecuteNonQuery();
+                    transaction.Commit();
+                }
             }
         }
 

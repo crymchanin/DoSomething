@@ -8,7 +8,7 @@ namespace DoSomething {
             InitializeComponent();
 
             Exception innerExeption;
-            if (!AppHelper.Init(out innerExeption)) {
+            if (!AppHelper.Init(this, out innerExeption)) {
                 AppHelper.CreateMessage(innerExeption.ToString(), Feodosiya.Lib.Logs.MessageType.Error, true);
                 Load += (s, e) => Application.Exit();
                 return;

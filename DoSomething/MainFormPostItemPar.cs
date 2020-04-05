@@ -150,8 +150,56 @@ namespace DoSomething {
             }
         }
 
+        private void PostItemPar_MultipleUsersButton_Click(object sender, EventArgs e) {
+            try {
+                PostItemParHelper.ParamInfo paramInfo = ((PostItemParHelper.ParamInfo)PostItemPar_ParamsBox.SelectedItem);
+                if (paramInfo == null) {
+                    System.Media.SystemSounds.Beep.Play();
+                    return;
+                }
+                if (MessageBox.Show("Данный параметр будет помечен как многопользовательский. Продолжить выполнение?",
+                                    "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) {
+                    return;
+                }
+
+                PostItemParHelper.SetParamPlaced(PostItemPar_GetConnectString(), paramInfo.Id, true);
+                paramInfo.IsPlace = 1;
+
+                MessageBox.Show("Изменения успешно внесены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex) {
+                AppHelper.CreateMessage(ex.ToString(), Feodosiya.Lib.Logs.MessageType.Error, true);
+            }
+        }
+
+        private void PostItemPar_SingleButton_Click(object sender, EventArgs e) {
+            try {
+                PostItemParHelper.ParamInfo paramInfo = ((PostItemParHelper.ParamInfo)PostItemPar_ParamsBox.SelectedItem);
+                if (paramInfo == null) {
+                    System.Media.SystemSounds.Beep.Play();
+                    return;
+                }
+                if (MessageBox.Show("Данный параметр будет помечен как однопользовательский. Настройки для всех пользователей кроме системного будут удалены. Продолжить выполнение?",
+                                    "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) {
+                    return;
+                }
+
+                string connectionString = PostItemPar_GetConnectString();
+                PostItemParHelper.SetParamPlaced(connectionString, paramInfo.Id, false);
+                paramInfo.IsPlace = 0;
+
+                PostItemParHelper.DeleteParamValueForAllUsers(connectionString, paramInfo.Id);
+
+                MessageBox.Show("Изменения успешно внесены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex) {
+                AppHelper.CreateMessage(ex.ToString(), Feodosiya.Lib.Logs.MessageType.Error, true);
+            }
+        }
+
         private void PostItemPar_UpdateParamBox_Click(object sender, EventArgs e) {
             try {
+                string connectionString = PostItemPar_GetConnectString();
                 PostItemParHelper.UserInfo userInfo = ((PostItemParHelper.UserInfo)PostItemPar_UsersBox.SelectedItem);
                 PostItemParHelper.ParamInfo paramInfo = ((PostItemParHelper.ParamInfo)PostItemPar_ParamsBox.SelectedItem);
                 if ((userInfo == null && !PostItemPar_ForAllBox.Checked) || paramInfo == null) {
@@ -163,15 +211,19 @@ namespace DoSomething {
                     return;
                 }
 
-                if (PostItemPar_ForAllBox.Checked && paramInfo.IsPlace <= 0) {
-                    if (MessageBox.Show("Данный параметр не помечен как многопользовательский. Продолжить выполнение?",
+                if ((PostItemPar_ForAllBox.Checked || userInfo.Id != 0) && paramInfo.IsPlace <= 0) {
+                    if (MessageBox.Show("Данный параметр не помечен как многопользовательский. Установить его многопользовательским и продолжить выполнение?",
                         "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) {
                         return;
+                    }
+                    else {
+                        PostItemParHelper.SetParamPlaced(connectionString, paramInfo.Id, true);
+                        paramInfo.IsPlace = 1;
                     }
                 }
                 short? placeId = (PostItemPar_ForAllBox.Checked) ? null : (short?)userInfo.Id;
                 string value = PostItemPar_ParamValBox.Text;
-                short result = PostItemParHelper.SetParamValues(PostItemPar_GetConnectString(), placeId, paramInfo.Id, paramInfo.DatatypeId, value);
+                short result = PostItemParHelper.SetParamValues(connectionString, placeId, paramInfo.Id, paramInfo.DatatypeId, value);
                 if (result == -1) {
                     MessageBox.Show("Параметры не заданы. Изменения не были внесены в БД", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
