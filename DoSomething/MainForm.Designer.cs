@@ -280,6 +280,7 @@
             this.PlaceInfo_DBHostBox.Name = "PlaceInfo_DBHostBox";
             this.PlaceInfo_DBHostBox.Size = new System.Drawing.Size(145, 26);
             this.PlaceInfo_DBHostBox.TabIndex = 2;
+            this.PlaceInfo_DBHostBox.SelectedIndexChanged += new System.EventHandler(this.PlaceInfoConnectionCtrls_TextChanged);
             // 
             // PlaceInfo_DBConnectTestButton
             // 
@@ -381,6 +382,7 @@
             this.PlaceInfo_DBPathBox.Name = "PlaceInfo_DBPathBox";
             this.PlaceInfo_DBPathBox.Size = new System.Drawing.Size(484, 24);
             this.PlaceInfo_DBPathBox.TabIndex = 0;
+            this.PlaceInfo_DBPathBox.TextChanged += new System.EventHandler(this.PlaceInfoConnectionCtrls_TextChanged);
             // 
             // PostItemParamPage
             // 
@@ -398,9 +400,9 @@
             this.PostItemParamPage.Controls.Add(this.PostItemPar_ParamGetValButton);
             this.PostItemParamPage.Controls.Add(this.PostItemPar_ParamsBox);
             this.PostItemParamPage.Controls.Add(this.PostItemPar_DBParmsGroupBox);
-            this.PostItemParamPage.Location = new System.Drawing.Point(4, 27);
+            this.PostItemParamPage.Location = new System.Drawing.Point(4, 22);
             this.PostItemParamPage.Name = "PostItemParamPage";
-            this.PostItemParamPage.Size = new System.Drawing.Size(606, 510);
+            this.PostItemParamPage.Size = new System.Drawing.Size(606, 515);
             this.PostItemParamPage.TabIndex = 1;
             this.PostItemParamPage.Text = "Параметры ИС ОПС Почтовые отправления";
             this.PostItemParamPage.UseVisualStyleBackColor = true;
@@ -571,6 +573,7 @@
             this.PostItemPar_DBHostBox.Name = "PostItemPar_DBHostBox";
             this.PostItemPar_DBHostBox.Size = new System.Drawing.Size(145, 26);
             this.PostItemPar_DBHostBox.TabIndex = 2;
+            this.PostItemPar_DBHostBox.TextChanged += new System.EventHandler(this.PostItemParConnectionCtrls_TextChanged);
             // 
             // PostItemPar_DBConnectTestButton
             // 
@@ -672,6 +675,7 @@
             this.PostItemPar_DBPathBox.Name = "PostItemPar_DBPathBox";
             this.PostItemPar_DBPathBox.Size = new System.Drawing.Size(484, 24);
             this.PostItemPar_DBPathBox.TabIndex = 0;
+            this.PostItemPar_DBPathBox.TextChanged += new System.EventHandler(this.PostItemParConnectionCtrls_TextChanged);
             // 
             // MainForm
             // 

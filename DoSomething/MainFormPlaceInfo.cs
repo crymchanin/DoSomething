@@ -176,5 +176,13 @@ namespace DoSomething {
                 AppHelper.CreateMessage(ex.ToString(), Feodosiya.Lib.Logs.MessageType.Error, true);
             }
         }
+
+        private void PlaceInfoConnectionCtrls_TextChanged(object sender, EventArgs e) {
+            PlaceInfo_CurrentDataBox.Text = "";
+            Control[] ctrls = new Control[] { PlaceInfo_NewData1Box, PlaceInfo_NewData2Box, PlaceInfo_NewData3Box, PlaceInfo_NewData4Box, PlaceInfo_NewData5Box };
+            foreach (Control ctrl in ctrls) {
+                ctrl.Text = "";
+            }
+        }
     }
 }

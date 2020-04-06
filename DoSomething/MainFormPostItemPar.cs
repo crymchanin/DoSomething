@@ -238,5 +238,11 @@ namespace DoSomething {
                 AppHelper.CreateMessage(ex.ToString(), Feodosiya.Lib.Logs.MessageType.Error, true);
             }
         }
+
+        private void PostItemParConnectionCtrls_TextChanged(object sender, EventArgs e) {
+            PostItemPar_UsersBox.DataSource = null;
+            PostItemPar_ParamsBox.DataSource = null;
+            PostItemPar_ParamValBox.Text = "";
+        }
     }
 }
